@@ -3,9 +3,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary: white;
+  --secondary: theme(colors.slate.50);
+  --text: theme(colors.neutral.900);
+  --text-secondary: theme(colors.neutral.600);
+  --border: theme(colors.neutral.300);
+}
+
+.dark {
+  --primary: theme(colors.neutral.700);
+  --secondary: theme(colors.neutral.900);
+  --text: theme(colors.neutral.300);
+  --text-secondary: theme(colors.neutral.400);
+  --border: theme(colors.neutral.500);
+}
+
 input[type=number]{
     -moz-appearance: textfield;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -14,17 +32,22 @@ input::-webkit-inner-spin-button {
 input {
   @apply focus:outline-none;
 }
+
 * {
   @apply box-border;
 }
+
 h1, h2, h3, h4, h5, h6 {
   @apply font-worksans font-medium;
 }
+
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--text);
+  background-color: var(--primary);
 }
 
 code {

@@ -25,12 +25,19 @@ export default function PokemonDetails(props) {
   const [error, setError] = React.useState(false);
   if (pokemonData) {
     var [HP, Attack, Defense, SpAtk, SpDef, Speed] = pokemonData.stats;
-    [HP, Attack, Defense, SpAtk, SpDef, Speed] = [HP.base_stat, Attack.base_stat, Defense.base_stat, SpAtk.base_stat, SpDef.base_stat, Speed.base_stat];
+    [HP, Attack, Defense, SpAtk, SpDef, Speed] = [
+      HP.base_stat,
+      Attack.base_stat,
+      Defense.base_stat,
+      SpAtk.base_stat,
+      SpDef.base_stat,
+      Speed.base_stat,
+    ];
   }
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         setPokemonData(data);
         setLoading(false);
       })
@@ -41,7 +48,7 @@ export default function PokemonDetails(props) {
       });
   }, [pokemon]);
   return (
-    <div className="flex flex-col items-center text-center bg-slate-50 min-h-screen">
+    <div className="flex flex-col items-center text-center bg-secondary min-h-screen">
       <Header />
       {loading ? (
         <img src={pokedexLoadingGIF} alt="Loading..." className="opacity-10" />
@@ -55,7 +62,7 @@ export default function PokemonDetails(props) {
           ) : (
             <>
               <Link
-                className="inline-block mt-8 bg-white py-1 px-2 rounded shadow-md transition hover:bg-slate-50"
+                className="inline-block mt-8 bg-primary py-1 px-2 rounded shadow-md transition hover:bg-secondary"
                 to={{ pathname: "/", id: pokemonData.id }}
               >
                 Go to Pokedex
@@ -63,7 +70,7 @@ export default function PokemonDetails(props) {
               <div className="relative">
                 <Pokemon pokemon={pokemonData} />
                 <button
-                  className="absolute top-8 left-0 bg-white bg-opacity-70 px-2 pt-2.5 pb-1.5 rounded-full backdrop-filter backdrop-blur-[3px] backdrop-saturate-200 border border-white border-opacity-60"
+                  className="absolute top-8 left-0 bg-primary bg-opacity-70 px-2 pt-2.5 pb-1.5 rounded-full backdrop-filter backdrop-blur-[3px] backdrop-saturate-200 border border-primary border-opacity-60"
                   onClick={() => {
                     if (favorite) {
                       const favorites = JSON.parse(
@@ -89,13 +96,13 @@ export default function PokemonDetails(props) {
                   }}
                 >
                   {favorite ? (
-                    <Heart size="28" color="black" variant="Bold" />
+                    <Heart size="28" color="currentColor" variant="Bold" />
                   ) : (
-                    <Heart size="28" color="black" variant="Linear" />
+                    <Heart size="28" color="currentColor" variant="Linear" />
                   )}
                 </button>
               </div>
-              <div className="shadow-xl rounded-xl h-40 aspect-[2/1] bg-white flex mb-8 overflow-hidden p-2">
+              <div className="shadow-xl rounded-xl h-40 aspect-[2/1] bg-primary flex mb-8 overflow-hidden p-2">
                 <article className="text-right">
                   HP: {HP} <br />
                   Attack: {Attack} <br />
@@ -108,12 +115,30 @@ export default function PokemonDetails(props) {
                   id="grid"
                   className="grid grid-rows-6 gap-1.5 pl-1.5 py-0.5 grid-cols-1 grow"
                 >
-                  <div className={`rounded ${colorFromPercentage(HP)}`} style={{ width: HP/2.55 + '%' }} />
-                  <div className={`rounded ${colorFromPercentage(Attack)}`} style={{ width: Attack/2.55 + '%' }} />
-                  <div className={`rounded ${colorFromPercentage(Defense)}`} style={{ width: Defense/2.55 + '%' }} />
-                  <div className={`rounded ${colorFromPercentage(SpAtk)}`} style={{ width: SpAtk/2.55 + '%' }} />
-                  <div className={`rounded ${colorFromPercentage(SpDef)}`} style={{ width: SpDef/2.55 + '%' }} />
-                  <div className={`rounded ${colorFromPercentage(Speed)}`} style={{ width: Speed/2.55 + '%' }} />
+                  <div
+                    className={`rounded ${colorFromPercentage(HP)}`}
+                    style={{ width: HP / 2.55 + "%" }}
+                  />
+                  <div
+                    className={`rounded ${colorFromPercentage(Attack)}`}
+                    style={{ width: Attack / 2.55 + "%" }}
+                  />
+                  <div
+                    className={`rounded ${colorFromPercentage(Defense)}`}
+                    style={{ width: Defense / 2.55 + "%" }}
+                  />
+                  <div
+                    className={`rounded ${colorFromPercentage(SpAtk)}`}
+                    style={{ width: SpAtk / 2.55 + "%" }}
+                  />
+                  <div
+                    className={`rounded ${colorFromPercentage(SpDef)}`}
+                    style={{ width: SpDef / 2.55 + "%" }}
+                  />
+                  <div
+                    className={`rounded ${colorFromPercentage(Speed)}`}
+                    style={{ width: Speed / 2.55 + "%" }}
+                  />
                 </aside>
               </div>
             </>

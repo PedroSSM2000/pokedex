@@ -1,8 +1,8 @@
 import { Heart } from "iconsax-react";
-import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import pokedexLoadingGIF from "../pokedexLoading.gif";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import pokedexLoadingGIF from "../pokedexLoading.gif";
+import Header from "./Header";
 
 if (localStorage.getItem("favorites") === null)
   localStorage.setItem("favorites", JSON.stringify(new Array(899).fill(false)));
@@ -13,10 +13,10 @@ export default function Favorites() {
     setFavorites(JSON.parse(localStorage.getItem("favorites")));
   }, []);
   return (
-    <div className="flex flex-col items-center text-center bg-slate-50 min-h-screen">
+    <div className="flex flex-col items-center text-center bg-secondary min-h-screen">
       <Header />
       <Link
-        className="inline-block mt-8 bg-white py-1 px-2 rounded shadow-md transition hover:bg-slate-50"
+        className="inline-block mt-8 bg-primary py-1 px-2 rounded shadow-md transition hover:bg-secondary"
         to="/"
       >
         Go to Pokedex
@@ -41,8 +41,8 @@ function FavoritePokemon({ id }) {
   const [favorite, setFavorite] = useState(true);
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      .then((response) => response.json())
-      .then((pokemon) => {
+      .then(response => response.json())
+      .then(pokemon => {
         setPokemon(pokemon);
         setLoading(false);
       });
@@ -50,7 +50,7 @@ function FavoritePokemon({ id }) {
   const { name, sprites, types, weight, height } = pokemon;
   return (
     <div
-      className={`relative shadow-xl rounded-xl h-36 aspect-[2/1] bg-white flex my-4 overflow-hidden ${
+      className={`relative shadow-xl rounded-xl h-36 aspect-[2/1] bg-primary flex my-4 overflow-hidden ${
         loading ? "items-center justify-center" : ""
       }`}
     >
@@ -78,7 +78,7 @@ function FavoritePokemon({ id }) {
             </p>
           </div>
           <button
-            className="absolute top-0 left-0 bg-white bg-opacity-70 px-2 pt-2.5 pb-1.5 rounded-full backdrop-filter backdrop-blur-[3px] backdrop-saturate-200 border border-white border-opacity-60"
+            className="absolute top-0 left-0 bg-primary bg-opacity-70 px-2 pt-2.5 pb-1.5 rounded-full backdrop-filter backdrop-blur-[3px] backdrop-saturate-200 border border-primary border-opacity-60"
             onClick={() => {
               if (favorite) {
                 const favorites = JSON.parse(localStorage.getItem("favorites"));
@@ -94,9 +94,9 @@ function FavoritePokemon({ id }) {
             }}
           >
             {favorite ? (
-              <Heart size="28" color="black" variant="Bold" />
+              <Heart size="28" color="currentColor" variant="Bold" />
             ) : (
-              <Heart size="28" color="black" variant="Linear" />
+              <Heart size="28" color="currentColor" variant="Linear" />
             )}
           </button>
         </>
