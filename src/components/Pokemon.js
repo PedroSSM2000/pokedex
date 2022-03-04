@@ -11,7 +11,7 @@ export default function Pokemon(props) {
         <h1 className="capitalize text-xl mb-1 overflow-ellipsis whitespace-nowrap overflow-hidden">
           {name}
         </h1>
-        <p>{weight} kg</p>
+        <p>{weight / 10} kg</p>
         <p>{height * 10} cm</p>
         <p className="capitalize">
           {types[0].type.name} {types[1] ? types[1].type.name : ""}
